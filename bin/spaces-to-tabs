@@ -8,7 +8,7 @@ var logSymbols = require('log-symbols');
 var glob = require('glob');
 
 program
-  .version('0.0.1')
+  .version('0.0.2')
   .usage(
     '[options] <file ...>\n\n  Space to tabs: Convert space in your files to tabs')
   .option('-s, --spaces <integer>', 'Number of spaces in a group to convert')
