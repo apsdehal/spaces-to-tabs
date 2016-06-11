@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+var program = require('commander');
+var fs = require('fs');
+var chalk = require('chalk');
+var api = require('../src/api');
+var exit = require('exit');
+var logSymbols = require('log-symbols');
+var glob = require('glob');
+
+program
+  .version('0.0.1')
+  .usage(
+    '[options] <file ...>\n\n  Space to tabs: Convert space in your files to tabs')
+  .option('-s, --spaces <integer>', 'Number of spaces in a group to convert')
+  .option('-w, --no-write', 'Don\'t write the file. Default: false')
+
+program.on('--help', function(){
+  console.log('  Globbing is supported in files')
+  console.log('');
+  console.log('  Examples:');
+  console.log('');
+  console.log('    $ spaces-to-tabs jquery-mobile/tests/**/*.js -s 4');
+  console.log('');
+  console.log('  By Amanpreet Singh <@apsdehal>');
+  console.log('');
+});
+
+program.parse(process.argv);
+
+var files = program.args;
+var spaces = program.spaces;
+var write = program.write;
+
+function parseFiles(err, files) {
+  if (err) {
+    console.log(logSymbols.error, chalk.bold.red('Error in Globbing pattern!'));
+    console.log(error.toString());
+    exit();
+  }
+
+  var errors = [], passed = [];
+  files.forEach(function (file) {
+    try {
+      data = fs.readFileSync(file).toString();
+      parsedCode = api(data, spaces);
+
+      if (write) {
+        fs.writeFileSync(file, parsedCode);
+      } else {
+        console.log(logSymbols.success +
+          ' ' + chalk.bold.green('Output for %s:\n'), file);
+        console.log(parsedCode);
+      }
+
+      passed.push(file);
+    } catch (e) {
+      console.log(logSymbols.error + ' ' +
+        chalk.bold.red('Error occured while fixing file: %s'), file);
+
+      console.log(e.toString());
+      errors.push(file);
+    }
+  });
+
+  if (errors.length) {
+    console.log(chalk.bold.red('Following files were not converted:'));
+    errors.forEach(function (error) {
+      console.log(logSymbols.error, chalk.red(error));
+    });
+  }
+
+  if (passed.length) {
+    console.log(chalk.bold.green('Following files were successfully converted:'));
+    passed.forEach(function (pass) {
+      console.log(logSymbols.success, chalk.green(pass));
+    });
+  }
+
+}
+
+if (Array.isArray(files)) {
+  parseFiles(null, files);
+} else {
+  glob(files, parseFiles);
+}
