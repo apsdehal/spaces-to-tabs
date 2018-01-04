@@ -1,4 +1,4 @@
-# space-to-tabs
+# spaces-to-tabs
 [![NPM Version](https://img.shields.io/npm/v/spaces-to-tabs.svg?style=flat)](https://www.npmjs.com/package/spaces-to-tabs)
 [![Build Status](https://travis-ci.org/apsdehal/spaces-to-tabs.svg?branch=master)](https://travis-ci.org/apsdehal/spaces-to-tabs)
 
@@ -11,7 +11,7 @@ Convert spaces to tabs
 ## Usage
 
 ```
-  $ space-to-tabs -h
+  $ spaces-to-tabs -h
 
   Usage: spaces-to-tabs [options] <file ...>
 
