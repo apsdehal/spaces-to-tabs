@@ -22,7 +22,7 @@ Convert spaces to tabs
     -h, --help              output usage information
     -V, --version           output the version number
     -s, --spaces <integer>  Number of spaces in a group to convert
-    -w, --no-write          Don't write the file. Default: false
+    -w, --no-write          Don't write the file. Writes by default.
 
   Globbing is supported in files
 

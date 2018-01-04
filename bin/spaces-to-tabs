@@ -12,7 +12,7 @@ program
   .usage(
     '[options] <file ...>\n\n  Space to tabs: Convert space in your files to tabs')
   .option('-s, --spaces <integer>', 'Number of spaces in a group to convert')
-  .option('-w, --no-write', 'Don\'t write the file. Default: false')
+  .option('-w, --no-write', 'Don\'t write the file. Writes by default.')
 
 program.on('--help', function(){
   console.log('  Globbing is supported in files')

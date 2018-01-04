@@ -1,6 +1,6 @@
 {
   "name": "spaces-to-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert spaces to tab in your files",
   "bin": "bin/spaces-to-tabs",
   "main": "src/api.js",
